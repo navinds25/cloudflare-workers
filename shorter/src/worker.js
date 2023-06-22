@@ -71,7 +71,7 @@ export default {
 			const longUrl = await getLongUrl(request.url)
 			if (longUrl != null) {
 				const destination = longUrl;
-				const statusCode = 301;
+				const statusCode = 302;
 				return Response.redirect(destination, statusCode);
 			} else {
 				return new Response('hello world');
