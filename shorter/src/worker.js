@@ -8,12 +8,14 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
+import { nanoid } from 'nanoid/async'
+
 export default {
 	async fetch(request, env, ctx) {
 		const url = new URL(request.url);
 		const { pathname } = url;
 
-		const setUrlPair = (shortUrl, longUrl) => env.shorter.put(shortUrl, longUrl);
+		const setUrlPair = (shortUrl, longUrl) => env.shorter.put(shortUrl, longUrl, {expirationTtl: 86400});
 		const getLongUrl = (shortUrl) => env.shorter.get(shortUrl);
 		async function verifyCredentials(user, pass) {
 			const basicUser = await env.shorter_config.get("shorterBasicUser");
@@ -60,7 +62,8 @@ export default {
 			};
 		}
 		async function genShortUrl() {
-			const randUrlstring = Math.random().toString(36).substr(2, 5);
+			//const randUrlstring = Math.random().toString(36).substr(2, 5);
+      const randUrlstring = await nanoid();
 			const rootDomain = await env.shorter_config.get('rootDomain');
 			return `https://${rootDomain}/${randUrlstring}`
 		}
