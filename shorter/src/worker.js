@@ -18,8 +18,8 @@ export default {
 		const setUrlPair = (shortUrl, longUrl) => env.shorter.put(shortUrl, longUrl, {expirationTtl: 86400});
 		const getLongUrl = (shortUrl) => env.shorter.get(shortUrl);
 		async function verifyCredentials(user, pass) {
-			const basicUser = SHORTER_BASIC_USER;
-			const basicPass = SHORTER_BASIC_PASSWORD;
+			const basicUser = env.SHORTER_BASIC_USER;
+			const basicPass = env.SHORTER_BASIC_PASSWORD;
 			if (basicUser !== user) {
 				throw new UnauthorizedException("Invalid credentials.");
 			}
@@ -63,7 +63,7 @@ export default {
 		}
 		async function genShortUrl() {
       const randUrlstring = await nanoid();
-			const rootDomain = SHORTER_ROOT_DOMAIN;
+			const rootDomain = env.SHORTER_ROOT_DOMAIN;
 			return `https://${rootDomain}/${randUrlstring}`
 		}
 		if (request.method == "GET") {
