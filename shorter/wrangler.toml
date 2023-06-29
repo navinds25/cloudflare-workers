@@ -2,8 +2,10 @@ name = "shorter"
 main = "src/worker.js"
 compatibility_date = "2023-06-04"
 
-kv_namespaces = [{binding = "shorter", id = "b53da68bdb714f29a2c69eaf756756aa" }, {binding = "shorter_config", id = "49358ef627fa4ea18fa5c656d263542e"}]
+kv_namespaces = [{binding = "shorter", id = "b53da68bdb714f29a2c69eaf756756aa" }]
 routes = [{pattern = "url.n25tech.com", zone_name = "n25tech.com", custom_domain = true}]
+
+#secret vars: SHORTER_BASIC_USER, SHORTER_BASIC_PASSWORD, SHORTER_ROOT_DOMAIN
 
 # # KV Namespace binding - For more information: https://developers.cloudflare.com/workers/runtime-apis/kv
 #[[kv_namespaces]]
